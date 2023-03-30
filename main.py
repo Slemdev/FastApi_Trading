@@ -34,6 +34,8 @@ class UserLogin(BaseModel):
 
 app = FastAPI()
 
+
+
 # Début des endpoints
 
 @app.get("/")
