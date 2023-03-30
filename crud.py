@@ -79,8 +79,10 @@ def obtenir_action_user(id_user:int) -> list:
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
     curseur.execute("""
-                    SELECT * FROM actions WHERE auteur_id = 1
+                    SELECT * FROM actions WHERE utilisateur_id = ?
                     """, (id_user,))
     resultat = curseur.fetchall()
     connexion.close()
     return resultat
+
+
