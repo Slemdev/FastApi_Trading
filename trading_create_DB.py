@@ -11,8 +11,10 @@ curseur.execute("""
                 CREATE TABLE IF NOT EXISTS utilisateur (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     nom TEXT NOT NULL,
-                    email TEXT NOT NULL,
-                    mdp TEXT NOT NULL
+                    email TEXT NOT NULL UNIQUE,
+                    est_actif BOOLEAN NOT NULL,
+                    mdp TEXT NOT NULL,
+                    jwt TEXT
 )
 """)
 con.commit()
