@@ -12,7 +12,9 @@ curseur.execute("""
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     nom TEXT NOT NULL,
                     email TEXT NOT NULL,
-                    mdp TEXT NOT NULL
+                    mdp TEXT NOT NULL,
+                    JWT INTEGER NOT NULL,
+                
 )
 """)
 con.commit()

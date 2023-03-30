@@ -52,6 +52,8 @@ def get_users_by_mail(mail:str):
     connexion.close()
     return resultat
 
+
+
 def get_id_user_by_email(email:str):
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
@@ -61,6 +63,18 @@ def get_id_user_by_email(email:str):
     resultat = curseur.fetchone()
     connexion.close()
     return resultat
+
+
+#def select_actions_dispo(mail:str):
+    connexion = sqlite3.connect("bdd.db")
+    curseur = connexion.cursor()
+    curseur.execute("""
+                    SELECT * FROM actions WHERE email=?
+                    """, (mail,))
+    resultat = curseur.fetchall()
+    connexion.close()
+    return resultat
+
 
 def update_token(id, token:str)->None:
     connexion = sqlite3.connect("bdd.db")
