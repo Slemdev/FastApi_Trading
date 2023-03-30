@@ -1,0 +1,23 @@
+READ : 
+
+    séléctionner les actions disponibles
+    obtenir le JWT avec le mail et le mdp
+    vérifier la validité du JWT
+    voir ses actions
+    voir les actions des personnes que l'on suit
+    obtenir l'id d'un utilisateur depuis son mail et/ou son JWT
+
+CREATE : 
+    creer un utilisateur
+    une actionsune ligne dans le registre
+    permettre à un utilisateur d'en suivre un autre
+
+UPDATE : 
+    changement de mail / JWT / mdp
+    vendre une action
+    (changer la valeur d'une action ( bonus ))
+
+DELETE : 
+    supprimer une action
+    supprimer un utilisateur
+    arrêter de suivre
