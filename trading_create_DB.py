@@ -36,6 +36,8 @@ curseur.execute("""
                 id INTEGER PRIMARY KEY AUTOINCREMENT, 
                 id_action INTEGER,
                 id_user INTEGER,
+                titre STRING,
+                contenu STRING,
                 prix_achat INTEGER,
                 prix_vente INTEGER,
                 data_achat DATETIME,

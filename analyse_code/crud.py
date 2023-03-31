@@ -84,3 +84,4 @@ def obtenir_article_user(id_user:int) -> list:
     resultat = curseur.fetchall()
     connexion.close()
     return resultat
+
