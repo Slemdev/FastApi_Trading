@@ -161,7 +161,7 @@ def update_action(entreprise:str, prix:int) -> None:
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
     curseur.execute("""
-                    UPDATE action
+                    UPDATE actions
                         SET prix = ?
                         WHERE entreprise =?
                     """,(entreprise,prix))
