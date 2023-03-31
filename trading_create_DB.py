@@ -48,7 +48,8 @@ curseur.execute("""
 con.commit()
 
 curseur.execute("""
-                CREATE TABLE IF NOT EXISTS asso_suivant(
+                CREATE TABLE IF NOT EXISTS asso_suivi(
+                
                 id_suiveur INTEGER,
                 id_suivi INTEGER,
                 FOREIGN KEY (id_suiveur) REFERENCES utilisateur(id),

@@ -64,17 +64,20 @@ def get_id_user_by_email(email:str):
     connexion.close()
     return resultat
 
+#selec
 
-#def select_actions_dispo(mail:str):
+def select_actions_dispo(id:int):
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
     curseur.execute("""
-                    SELECT * FROM actions WHERE email=?
-                    """, (mail,))
+                    SELECT * FROM actions WHERE id=?
+                    """, (id,))
     resultat = curseur.fetchall()
     connexion.close()
     return resultat
 
+
+#verifier validité du token
 
 def update_token(id, token:str)->None:
     connexion = sqlite3.connect("bdd.db")
@@ -87,7 +90,7 @@ def update_token(id, token:str)->None:
     connexion.commit()
     connexion.close()
     
-# Obtenir actions d'un utilisateur : 
+#Obtenir actions d'un utilisateur
 
 def obtenir_action_user(id_user:int) -> list:
     connexion = sqlite3.connect("bdd.db")
@@ -100,3 +103,15 @@ def obtenir_action_user(id_user:int) -> list:
     return resultat
 
 
+#obtenir les actions d'une personne suivi
+
+
+def obtenir_action_suivi(id_user:int) -> list:
+    connexion = sqlite3.connect("bdd.db")
+    curseur = connexion.cursor()
+    curseur.execute("""
+                    SELECT * FROM actions WHERE utilisateur_id = ?
+                    """, (id_user,))
+    resultat = curseur.fetchall()
+    connexion.close()
+    return resultat
