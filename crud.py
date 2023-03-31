@@ -20,6 +20,8 @@ def creer_utilisateur(nom:str, email:str, mdp:str, jwt:str) -> int:
     connexion.close()
     return id_user
 
+#permettre à un utilisateur d'en suivre un autre
+
 def user_suivi_user(id_suiveur:int, id_suivi:int) -> None:
     
     connexion = sqlite3.connect("bdd.db")
@@ -229,6 +231,19 @@ def supprimer_suivi(id_suiveur, id_suivi) -> None :
                     DELETE FROM asso_suivi
                     WHERE id_suivi =? OR id_suiveur=?
                     """, (id_suiveur, id_suivi))
+    resultat = curseur.fetchall()
+    connexion.close()
+    return resultat
+
+#supprimer une action
+
+def supprimer_action(id_action) -> None :
+    connexion = sqlite3.connect("bdd.db")
+    curseur = connexion.cursor()
+    curseur.execute("""
+                    DELETE FROM action
+                    WHERE id_action = ?
+                    """, (id_action))
     resultat = curseur.fetchall()
     connexion.close()
     return resultat

@@ -1,17 +1,13 @@
 TODO : 
     READ : 
 
-
-
     CREATE : 
-        permettre à un utilisateur d'en suivre un autre
 
     UPDATE : 
 
         (changer la valeur d'une action ( bonus ))
 
     DELETE : 
-        supprimer une action
 
 
 DONE : 
@@ -30,7 +26,7 @@ DONE :
     x   creer une ligne dans le registre des actions
     x   creer un utilisateur
     x   creer une action
-
+    x   permettre à un utilisateur d'en suivre un autre
 
     UPDATE
     x   changement de mail 
@@ -40,3 +36,4 @@ DONE :
     DELETE
     x    supprimer un utilisateur
     x    arrêter de suivre
+    x    supprimer une action
