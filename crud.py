@@ -36,7 +36,7 @@ def user_suivi_user(id_suiveur:int, id_suivi:int) -> None:
 
 
 #creer une ligne dans le registre des actions
-def creer_action(titre:str, contenu:str, auteur_id:int) -> None:
+def creer_action(titre:str, contenu:str, id_user:int) -> None:
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
     curseur.execute("""
@@ -46,7 +46,7 @@ def creer_action(titre:str, contenu:str, auteur_id:int) -> None:
     # En savoir plus sur les dates : http://www.python-simple.com/python-modules-autres/date-et-temps.php
     connexion.commit()
     connexion.close()
-    
+
 # Auth utilisateur : 
 
 def obtenir_jwt_depuis_email_mdp(email:str, mdp:str):
@@ -92,7 +92,6 @@ def get_JWT_by_mail(JWT:str, mail:str, mdp:str):
     resultat = curseur.fetchall()
     connexion.close()
     return resultat
-
 
 
 #séléctionner les actions disponibles
@@ -165,6 +164,44 @@ def obtenir_action_suivi(id_user:int) -> list:
     curseur.execute("""
                     SELECT * FROM actions WHERE utilisateur_id = ?
                     """, (id_user,))
+    resultat = curseur.fetchall()
+    connexion.close()
+    return resultat
+
+#vendre une action
+def vendre_action(id_action:int,id_user:int, email:str) -> list:
+    connexion = sqlite3.connect("bdd.db")
+    curseur = connexion.cursor()
+    curseur.execute("""
+                    UPDATE portefeuille_actions
+                    SET email= ? 
+                    WHERE id_actions = titre AND id_user= ?
+                    """, (id_action,id_user,email))
+    resultat = curseur.fetchall()
+    connexion.close()
+    return resultat
+
+
+#suppimer un utilisateur
+def supprimer_user(id) -> None :
+    connexion = sqlite3.connect("bdd.db")
+    curseur = connexion.cursor()
+    curseur.execute("""
+                    DELETE FROM utilisateur
+                    WHERE id =?
+                    """, (id))
+    resultat = curseur.fetchall()
+    connexion.close()
+    return resultat
+
+#supprimer suivi
+def supprimer_suivi(id_suiveur, id_suivi) -> None :
+    connexion = sqlite3.connect("bdd.db")
+    curseur = connexion.cursor()
+    curseur.execute("""
+                    DELETE FROM asso_suivi
+                    WHERE id_suivi =? OR id_suiveur=?
+                    """, (id_suiveur, id_suivi))
     resultat = curseur.fetchall()
     connexion.close()
     return resultat

@@ -1,27 +1,18 @@
 TODO : 
     READ : 
 
-        
-        
         vérifier la validité du JWT
-        x	voir ses actions
-        x	voir les actions des personnes que l'on suit
-
-        
 
     CREATE : 
         permettre à un utilisateur d'en suivre un autre
 
     UPDATE : 
 
-
-        vendre une action
         (changer la valeur d'une action ( bonus ))
 
     DELETE : 
         supprimer une action
-        supprimer un utilisateur
-        arrêter de suivre
+
 
 DONE : 
     READ
@@ -30,6 +21,9 @@ DONE :
     x   obtenir l'id d'un utilisateur depuis son mail 
     x   obtenir l'id d'un utilisateur depuis son JWT
     x	obtenir le JWT avec le mail et le mdp
+    x	voir ses actions
+    x	voir les actions des personnes que l'on suit
+
 
 
     CREATE
@@ -39,7 +33,10 @@ DONE :
 
 
     UPDATE
-    x changement de mail 
-    x changement de mdp
+    x   changement de mail 
+    x    changement de mdp
+    x    vendre une action    
         
     DELETE
+    x    supprimer un utilisateur
+    x    arrêter de suivre
