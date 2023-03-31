@@ -103,26 +103,26 @@ def select_actions_dispo(mail:str):
     return resultat
 
 #changement de JWT
-def update_token(id, token:str)->None:
+def update_token(id, jwt:str)->None:
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
     curseur.execute("""
                     UPDATE utilisateur
                         SET jwt = ?
                         WHERE id=?
-                    """,(token, id))
+                    """,(jwt, id))
     connexion.commit()
     connexion.close()
     
 #changement de mail
-def update_email(id, token:str)->None:
+def update_email(id, mail:str) -> None:
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
     curseur.execute("""
                     UPDATE utilisateur
                         SET mail = ?
                         WHERE id=?
-                    """,(token, id))
+                    """,(mail, id))
     connexion.commit()
     connexion.close()
     
