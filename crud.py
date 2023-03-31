@@ -49,13 +49,13 @@ def creer_action(id_user:int) -> None:
     
 #creer une ligne en remplissant les champs dans la table portefeuilleactions
 
-def creer_action(id_user:int) -> None:
+def creer_ligne_action(id_user:int,id_action: int,prix_achat:int,prix_vente:int,date_achat,date_vente) -> list :
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
     curseur.execute("""
-                    INSERT INTO actions 
-                        VALUES (?, ?)
-                    """, (id_user, datetime.datetime.today().strftime("%Y-%m-%d %H:%M:%S")))
+                    INSERT INTO portefeuilleactions 
+                        VALUES (?, ?, NULL, NULL, NULL, NULL)
+                    """, (id_user,id_action,prix_achat,prix_vente, datetime.datetime.today().strftime("%Y-%m-%d %H:%M:%S"),datetime.datetime.today().strftime("%Y-%m-%d %H:%M:%S")))
     # En savoir plus sur les dates : http://www.python-simple.com/python-modules-autres/date-et-temps.php
     connexion.commit()
     connexion.close()
@@ -188,7 +188,7 @@ def vendre_action(id_action:int,id_user:int, prix_vente,date_vente) -> list:
     curseur.execute("""
                     UPDATE portefeuille_actions 
                     WHERE id_actions = ? AND id_user= ? AND prix_vente= ? AND date_vente = ?
-                    """, (id_action,id_user,prix_vente,date_vente.datetime.today().strftime("%Y-%m-%d %H:%M:%S")))
+                    """, (id_action,id_user,prix_vente,datetime.datetime.today().strftime("%Y-%m-%d %H:%M:%S")))
     resultat = curseur.fetchall()
     connexion.close()
     return resultat
