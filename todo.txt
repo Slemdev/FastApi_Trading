@@ -18,8 +18,7 @@ TODO :
 
     DELETE : 
         supprimer une action
-        supprimer un utilisateur
-        arrêter de suivre
+
 
 DONE : 
     READ
@@ -44,3 +43,5 @@ DONE :
     x changement de mdp
         
     DELETE
+    x    supprimer un utilisateur
+    x    arrêter de suivre
