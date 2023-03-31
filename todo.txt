@@ -13,9 +13,8 @@ TODO :
         permettre à un utilisateur d'en suivre un autre
 
     UPDATE : 
-        x   changement de mail 
-        
-        x changement de mdp
+
+
         vendre une action
         (changer la valeur d'une action ( bonus ))
 
@@ -40,5 +39,7 @@ DONE :
 
 
     UPDATE
-    x   
+    x changement de mail 
+    x changement de mdp
+        
     DELETE

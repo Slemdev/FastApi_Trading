@@ -72,8 +72,7 @@ def get_JWT_by_mail(JWT:str, mail:str, mdp:str):
     curseur = connexion.cursor()
     curseur.execute("""
                     SELECT jwt FROM utilisateur 
-                    WHERE mail=?
-                    AND WHERE mdp=?
+                    WHERE mail=? AND mdp=?
                     """, (JWT,mail, mdp))
     resultat = curseur.fetchall()
     connexion.close()
