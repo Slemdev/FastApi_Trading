@@ -116,7 +116,7 @@ def get_jwt_by_mail(jwt:str, mail:str, mdp:str):
 
 
 #séléctionner les actions disponibles
-def select_actions_dispo(id:int):
+def select_actions_dispo(id_action:int):
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
     curseur.execute("""
