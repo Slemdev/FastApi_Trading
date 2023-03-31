@@ -1,7 +1,6 @@
 READ : 
 
     séléctionner les actions disponibles
-<<<<<<< HEAD
     x	obtenir le JWT avec le mail et le mdp
     vérifier la validité du JWT
     x	voir ses actions
@@ -18,21 +17,6 @@ UPDATE :
     changement de mail 
     x changement de JWT
     x changement de mdp
-=======
-    x obtenir le JWT avec le mail et le mdp 
-    vérifier la validité du JWT
-   x voir ses actions
-     voir les actions des personnes que l'on suit
-    x obtenir l'id d'un utilisateur depuis son mail et/ou son JWT
-
-CREATE : 
-   x creer un utilisateur
-   x creer une actionsune ligne dans le registre
-    permettre à un utilisateur d'en suivre un autre
-
-UPDATE : 
-    changement de mail / x JWT / mdp
->>>>>>> 0465e8589930826d2bcd08a0ecd87fd0ae8306eb
     vendre une action
     (changer la valeur d'une action ( bonus ))
 
