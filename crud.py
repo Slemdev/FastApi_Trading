@@ -12,7 +12,7 @@ def creer_utilisateur(nom:str, email:str, mdp:str, jwt:str) -> int:
     curseur = connexion.cursor()
     curseur.execute("""
                     INSERT INTO utilisateur 
-                        VALUES (NULL, ?, ?, 1, ?, ?, ?)
+                        VALUES (NULL, ?, ?, 1, ?, ?)
                     """, (nom, email, mdp,datetime.datetime.today().strftime("%Y-%m-%d %H:%M:%S"), jwt))
     id_user = curseur.lastrowid
     connexion.commit()
@@ -182,14 +182,13 @@ def obtenir_action_suivi(id_user:int) -> list:
     return resultat
 
 #vendre une action  | ajout prix de vente de date
-def vendre_action(id_action:int,id_user:int, email:str) -> list:
+def vendre_action(id_action:int,id_user:int, prix_vente,date_vente) -> list:
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
     curseur.execute("""
-                    UPDATE portefeuille_actions
-                    SET email= ? 
-                    WHERE id_actions = titre AND id_user= ?
-                    """, (id_action,id_user,email))
+                    UPDATE portefeuille_actions 
+                    WHERE id_actions = ? AND id_user= ? AND prix_vente= ? AND date_vente = ?
+                    """, (id_action,id_user,prix_vente,date_vente.datetime.today().strftime("%Y-%m-%d %H:%M:%S")))
     resultat = curseur.fetchall()
     connexion.close()
     return resultat
