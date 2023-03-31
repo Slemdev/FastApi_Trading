@@ -5,14 +5,14 @@ import datetime
 # Ajout d'éléments dans la BDD
 
 #creation utilisateur
-def creer_utilisateur(nom:str, email:str, mdp:str, jwt:str) -> int:
+def creer_utilisateur(nom:str, email:str, mdp:str, jwt:str) -> list:
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
     curseur.execute("""
                     INSERT INTO utilisateur 
                         VALUES (NULL, ?, ?, 1, ?, ?)
                     """, (nom, email, mdp,datetime.datetime.today().strftime("%Y-%m-%d %H:%M:%S"), jwt))
-    id_user = curseur.lastrowid
+    id_user = curseur.lastrowid # permet de recupérer l'id du premier utilisateur
     connexion.commit()
 
     connexion.close()
@@ -36,17 +36,18 @@ def user_suivi_user(id_suiveur:int, id_suivi:int) -> None:
 
 
 #creer une action dans la table action
-def creer_action(id_user:int) -> None:
+def creer_action(id_user:int,id_action:int) -> list:
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
     curseur.execute("""
                     INSERT INTO actions 
-                        VALUES (?, ?)
-                    """, (id_user, datetime.datetime.today().strftime("%Y-%m-%d %H:%M:%S")))
+                        VALUES (?, ?, ?)
+                    """, (id_user,id_action ,datetime.datetime.today().strftime("%Y-%m-%d %H:%M:%S")))
     # En savoir plus sur les dates : http://www.python-simple.com/python-modules-autres/date-et-temps.php
+    id_action = curseur.lastrowid # permet de recupérer l'id du premier utilisateur
     connexion.commit()
-    connexion.close()
 
+    connexion.close()
 #creer une ligne en remplissant les champs dans la table portefeuilleactions
 
 def creer_ligne_action(id_user:int,id_action: int,prix_achat:int,prix_vente:int,date_achat,date_vente) -> list :
@@ -115,12 +116,12 @@ def get_jwt_by_mail(jwt:str, mail:str, mdp:str):
 
 
 #séléctionner les actions disponibles
-def select_actions_dispo(id:int):
+def select_actions_dispo(id:git stint):
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
     curseur.execute("""
-                    SELECT * FROM actions WHERE id=?
-                    """, (id,))
+                    SELECT * FROM actions WHERE id_action=?
+                    """, (id_action,))
     resultat = curseur.fetchall()
     connexion.close()
     return resultat
@@ -133,7 +134,7 @@ def update_token(id, jwt:str)->None:
                     UPDATE utilisateur
                         SET jwt = ?
                         WHERE id=?
-                    """,(jwt, id))
+                    """,(id,jwt))
     connexion.commit()
     connexion.close()
     
@@ -189,18 +190,18 @@ def obtenir_action_user(id_user:int, id_action:int) -> list:
 #obtenir les actions d'une personne suivi
 
 
-def obtenir_action_suivi(id_user:int, id_action:int) -> list:
+def obtenir_action_suivi(id_suivi:int,id_action) -> list:
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
     curseur.execute("""
-                    SELECT * FROM actions WHERE utilisateur_id = ?
-                    """, (id_user,id_action))
+                    SELECT * FROM actions WHERE id_suivi=?
+                    """, (id_suivi,id_action,))
     resultat = curseur.fetchall()
     connexion.close()
     return resultat
 
 #vendre une action
-def vendre_action(id_action:int,id_user:int,prix_vente:int) -> list:
+def vendre_action(id_action:int,id_user:int,prix_vente:int,date_vente) -> list:
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
     curseur.execute("""
@@ -227,6 +228,7 @@ def verifier_jwt(jwt:str, id_user:str) -> None :
     if len(resultat) <1 :
         return False
     return True
+    
 
 
 #suppimer un utilisateur
