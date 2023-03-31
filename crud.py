@@ -100,7 +100,7 @@ def get_users_by_jwt(jwt:str):
     connexion.close()
     return resultat
 
-#obtenir le jwt avec l'auth id/mdp
+#obtenir le jwt avec l'auth mail/mdp
 def get_jwt_by_mail(jwt:str, mail:str, mdp:str):
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
@@ -145,7 +145,7 @@ def update_email(id, mail:str) -> None:
                     UPDATE utilisateur
                         SET mail = ?
                         WHERE id=?
-                    """,(mail, id))
+                    """,( id,mail))
     connexion.commit()
     connexion.close()
     
@@ -174,13 +174,13 @@ def update_action(entreprise:str, prix:int) -> None:
     connexion.close()
 
 # Obtenir actions d'un utilisateur : 
-#voir les actions des personnes que l'on suit
-def obtenir_action_user(id_user:int) -> list:
+def obtenir_action_user(id_user:int, id_action:int) -> list:
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
     curseur.execute("""
-                    SELECT * FROM actions WHERE utilisateur_id = ?
-                    """, (id_user,))
+                    SELECT * FROM actions 
+                    WHERE utilisateur_id = ?
+                    """, (id_user, id_action))
     resultat = curseur.fetchall()
     connexion.close()
     return resultat
