@@ -20,6 +20,21 @@ def creer_utilisateur(nom:str, email:str, mdp:str, jwt:str) -> int:
     connexion.close()
     return id_user
 
+def user_suivi_user(id_suiveur:int, id_suivi:int) -> None:
+    
+    connexion = sqlite3.connect("bdd.db")
+    curseur = connexion.cursor()
+    curseur.execute("""
+                    INSERT INTO asso_suivi
+                        VALUES (?,?     
+                        )
+                    """, (id_suiveur,id_suivi))
+    
+    connexion.commit()
+
+    connexion.close()
+
+
 #creer une ligne dans le registre des actions
 def creer_action(titre:str, contenu:str, auteur_id:int) -> None:
     connexion = sqlite3.connect("bdd.db")
