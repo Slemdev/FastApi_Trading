@@ -1,19 +1,14 @@
 TODO : 
     READ : 
 
-    séléctionner les actions disponibles
-    x obtenir le JWT avec le mail et le mdp 
-    x vérifier la validité du JWT
-   x voir ses actions
-     voir les actions des personnes que l'on suit
-    x obtenir l'id d'un utilisateur depuis son mail et/ou son JWT
+        
+        
+        vérifier la validité du JWT
 
         
 
-UPDATE : 
-   x changement de mail / x JWT / xmdp
-    vendre une action
-    (changer la valeur d'une action ( bonus ))
+    CREATE : 
+        permettre à un utilisateur d'en suivre un autre
 
     UPDATE : 
 
@@ -33,6 +28,9 @@ DONE :
     x   obtenir l'id d'un utilisateur depuis son mail 
     x   obtenir l'id d'un utilisateur depuis son JWT
     x	obtenir le JWT avec le mail et le mdp
+    x	voir ses actions
+    x	voir les actions des personnes que l'on suit
+
 
 
     CREATE

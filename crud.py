@@ -21,7 +21,7 @@ def creer_utilisateur(nom:str, email:str, mdp:str, jwt:str) -> int:
     return id_user
 
 #creer une ligne dans le registre des actions
-def creer_action(titre:str, contenu:str, auteur_id:int) -> None:
+def creer_action(titre:str, contenu:str, id_user:int) -> None:
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
     curseur.execute("""
@@ -78,17 +78,6 @@ def get_JWT_by_mail(JWT:str, mail:str, mdp:str):
     connexion.close()
     return resultat
 
-
-# obtenir l'id d'un utilisateur depuis son mail
-def get_id_user_by_email(email:str):
-    connexion = sqlite3.connect("bdd.db")
-    curseur = connexion.cursor()
-    curseur.execute("""
-                    SELECT id FROM utilisateur WHERE email=?
-                    """, (email,))
-    resultat = curseur.fetchone()
-    connexion.close()
-    return resultat
 
 #séléctionner les actions disponibles
 def select_actions_dispo(mail:str):
