@@ -2,8 +2,6 @@ import sqlite3
 import datetime
 
 
-
-
 # Ajout d'éléments dans la BDD
 
 #creation utilisateur
@@ -50,9 +48,6 @@ def creer_action(id_user:int,id_action:int) -> list:
     connexion.commit()
 
     connexion.close()
-    return id_action
-    
-    
 #creer une ligne en remplissant les champs dans la table portefeuilleactions
 
 def creer_ligne_action(id_user:int,id_action: int,prix_achat:int,prix_vente:int,date_achat,date_vente) -> list :
@@ -72,7 +67,9 @@ def obtenir_jwt_depuis_email_mdp(email:str, mdp:str):
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
     curseur.execute("""
-                    SELECT jwt FROM utilisateur WHERE email=? AND mdp=?
+                    SELECT jwt 
+                        FROM utilisateur
+                        WHERE email=? AND mdp=?
                     """, (email, mdp))
     resultat = curseur.fetchone()
     connexion.close()
@@ -83,7 +80,9 @@ def get_users_by_mail(mail:str):
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
     curseur.execute("""
-                    SELECT id FROM utilisateur WHERE email=?
+                    SELECT id 
+                        FROM utilisateur 
+                        WHERE email=?
                     """, (mail,))
     resultat = curseur.fetchall()
     connexion.close()
@@ -94,7 +93,9 @@ def get_users_by_jwt(jwt:str):
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
     curseur.execute("""
-                    SELECT id FROM utilisateur WHERE jwt=?
+                    SELECT id 
+                        ROM utilisateur 
+                        WHERE jwt=?
                     """, (jwt,))
     resultat = curseur.fetchall()
     connexion.close()
@@ -105,8 +106,9 @@ def get_jwt_by_mail(jwt:str, mail:str, mdp:str):
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
     curseur.execute("""
-                    SELECT jwt FROM utilisateur 
-                    WHERE mail=? AND mdp=?
+                    SELECT jwt 
+                        FROM utilisateur
+                        WHERE mail=? AND mdp=?
                     """, (jwt,mail, mdp))
     resultat = curseur.fetchall()
     connexion.close()
@@ -114,7 +116,7 @@ def get_jwt_by_mail(jwt:str, mail:str, mdp:str):
 
 
 #séléctionner les actions disponibles
-def select_actions_dispo(id_action:int):
+def select_actions_dispo(id:int):
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
     curseur.execute("""
@@ -144,7 +146,7 @@ def update_email(id, mail:str) -> None:
                     UPDATE utilisateur
                         SET mail = ?
                         WHERE id=?
-                    """,(id, mail))
+                    """,( id,mail))
     connexion.commit()
     connexion.close()
     
@@ -173,13 +175,13 @@ def update_action(entreprise:str, prix:int) -> None:
     connexion.close()
 
 # Obtenir actions d'un utilisateur : 
-
-def obtenir_action_user(id_user:int,id_action:int) -> list:
+def obtenir_action_user(id_user:int, id_action:int) -> list:
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
     curseur.execute("""
-                    SELECT * FROM actions WHERE utilisateur_id = ?
-                    """, (id_user,id_action,))
+                    SELECT * FROM actions 
+                    WHERE utilisateur_id = ?
+                    """, (id_user, id_action))
     resultat = curseur.fetchall()
     connexion.close()
     return resultat
@@ -215,7 +217,7 @@ def vendre_action(id_action:int,id_user:int,prix_vente:int,date_vente) -> list:
 
 
 # vérifié la validité du jwt
-def verifier_jwt(jwt:str) -> None :
+def verifier_jwt(jwt) -> None :
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
     curseur.execute("""
