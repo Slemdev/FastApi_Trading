@@ -2,8 +2,6 @@ import sqlite3
 import datetime
 
 
-
-
 # Ajout d'éléments dans la BDD
 
 #creation utilisateur
@@ -48,7 +46,7 @@ def creer_action(id_user:int) -> None:
     # En savoir plus sur les dates : http://www.python-simple.com/python-modules-autres/date-et-temps.php
     connexion.commit()
     connexion.close()
-    
+
 #creer une ligne en remplissant les champs dans la table portefeuilleactions
 
 def creer_ligne_action(id_user:int,id_action: int,prix_achat:int,prix_vente:int,date_achat,date_vente) -> list :
@@ -68,7 +66,9 @@ def obtenir_jwt_depuis_email_mdp(email:str, mdp:str):
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
     curseur.execute("""
-                    SELECT jwt FROM utilisateur WHERE email=? AND mdp=?
+                    SELECT jwt 
+                        FROM utilisateur
+                        WHERE email=? AND mdp=?
                     """, (email, mdp))
     resultat = curseur.fetchone()
     connexion.close()
@@ -79,38 +79,43 @@ def get_users_by_mail(mail:str):
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
     curseur.execute("""
-                    SELECT id FROM utilisateur WHERE email=?
+                    SELECT id 
+                        FROM utilisateur 
+                        WHERE email=?
                     """, (mail,))
     resultat = curseur.fetchall()
     connexion.close()
     return resultat
 
-#obtenir l'id d'un utilisateur depuis son JWT
-def get_users_by_JWT(JWT:str):
+#obtenir l'id d'un utilisateur depuis son jwt
+def get_users_by_jwt(jwt:str):
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
     curseur.execute("""
-                    SELECT id FROM utilisateur WHERE JWT=?
-                    """, (JWT,))
+                    SELECT id 
+                        ROM utilisateur 
+                        WHERE jwt=?
+                    """, (jwt,))
     resultat = curseur.fetchall()
     connexion.close()
     return resultat
 
-#obtenir le JWT avec l'auth id/mdp
-def get_JWT_by_mail(JWT:str, mail:str, mdp:str):
+#obtenir le jwt avec l'auth id/mdp
+def get_jwt_by_mail(jwt:str, mail:str, mdp:str):
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
     curseur.execute("""
-                    SELECT jwt FROM utilisateur 
-                    WHERE mail=? AND mdp=?
-                    """, (JWT,mail, mdp))
+                    SELECT jwt 
+                        FROM utilisateur
+                        WHERE mail=? AND mdp=?
+                    """, (jwt,mail, mdp))
     resultat = curseur.fetchall()
     connexion.close()
     return resultat
 
 
 #séléctionner les actions disponibles
-def select_actions_dispo(mail:str):
+def select_actions_dispo(id:int):
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
     curseur.execute("""
@@ -120,7 +125,7 @@ def select_actions_dispo(mail:str):
     connexion.close()
     return resultat
 
-#changement de JWT
+#changement de jwt
 def update_token(id, jwt:str)->None:
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
@@ -210,8 +215,8 @@ def vendre_action(id_action:int,id_user:int,prix_vente:int, email:str) -> list:
     return resultat
 
 
-# vérifié la validité du JWT
-def verifier_JWT(jwt) -> None :
+# vérifié la validité du jwt
+def verifier_jwt(jwt) -> None :
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
     curseur.execute("""
