@@ -1,19 +1,13 @@
 TODO : 
     READ : 
 
-        
-        
         vérifier la validité du JWT
-
-        
 
     CREATE : 
         permettre à un utilisateur d'en suivre un autre
 
     UPDATE : 
 
-
-        vendre une action
         (changer la valeur d'une action ( bonus ))
 
     DELETE : 
@@ -39,8 +33,9 @@ DONE :
 
 
     UPDATE
-    x changement de mail 
-    x changement de mdp
+    x   changement de mail 
+    x    changement de mdp
+    x    vendre une action    
         
     DELETE
     x    supprimer un utilisateur
