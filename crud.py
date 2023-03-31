@@ -42,7 +42,7 @@ def creer_action(titre:str, contenu:str, id_user:int) -> None:
     curseur.execute("""
                     INSERT INTO actions 
                         VALUES (NULL, ?, ?, ?, ?)
-                    """, (titre, contenu, datetime.datetime.today().strftime("%Y-%m-%d %H:%M:%S"), auteur_id))
+                    """, (titre, contenu, datetime.datetime.today().strftime("%Y-%m-%d %H:%M:%S"), id_user))
     # En savoir plus sur les dates : http://www.python-simple.com/python-modules-autres/date-et-temps.php
     connexion.commit()
     connexion.close()
@@ -168,7 +168,7 @@ def obtenir_action_suivi(id_user:int) -> list:
     connexion.close()
     return resultat
 
-#vendre une action
+#vendre une action  | ajout prix de vente de date
 def vendre_action(id_action:int,id_user:int, email:str) -> list:
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
