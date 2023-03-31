@@ -12,8 +12,8 @@ def creer_utilisateur(nom:str, email:str, mdp:str, jwt:str) -> int:
     curseur = connexion.cursor()
     curseur.execute("""
                     INSERT INTO utilisateur 
-                        VALUES (NULL, ?, ?, 1, ?, ?)
-                    """, (nom, email, mdp, jwt))
+                        VALUES (NULL, ?, ?, 1, ?, ?, ?)
+                    """, (nom, email, mdp,datetime.datetime.today().strftime("%Y-%m-%d %H:%M:%S"), jwt))
     id_user = curseur.lastrowid
     connexion.commit()
 
@@ -35,14 +35,27 @@ def user_suivi_user(id_suiveur:int, id_suivi:int) -> None:
     connexion.close()
 
 
-#creer une ligne dans le registre des actions
-def creer_action(titre:str, contenu:str, id_user:int) -> None:
+#creer une action dans la table action
+def creer_action(id_user:int) -> None:
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
     curseur.execute("""
                     INSERT INTO actions 
-                        VALUES (NULL, ?, ?, ?, ?)
-                    """, (titre, contenu, datetime.datetime.today().strftime("%Y-%m-%d %H:%M:%S"), id_user))
+                        VALUES (?, ?)
+                    """, (id_user, datetime.datetime.today().strftime("%Y-%m-%d %H:%M:%S")))
+    # En savoir plus sur les dates : http://www.python-simple.com/python-modules-autres/date-et-temps.php
+    connexion.commit()
+    connexion.close()
+    
+#creer une ligne en remplissant les champs dans la table portefeuilleactions
+
+def creer_action(id_user:int) -> None:
+    connexion = sqlite3.connect("bdd.db")
+    curseur = connexion.cursor()
+    curseur.execute("""
+                    INSERT INTO actions 
+                        VALUES (?, ?)
+                    """, (id_user, datetime.datetime.today().strftime("%Y-%m-%d %H:%M:%S")))
     # En savoir plus sur les dates : http://www.python-simple.com/python-modules-autres/date-et-temps.php
     connexion.commit()
     connexion.close()
