@@ -126,6 +126,18 @@ def update_email(id, mail:str) -> None:
     connexion.commit()
     connexion.close()
     
+#changement de mdp
+def update_email(mdp:str, mail:str) -> None:
+    connexion = sqlite3.connect("bdd.db")
+    curseur = connexion.cursor()
+    curseur.execute("""
+                    UPDATE utilisateur
+                        SET mdp = ?
+                        WHERE mail=?
+                    """,(mdp,mail))
+    connexion.commit()
+    connexion.close()
+    
 
 # Obtenir actions d'un utilisateur : 
 #voir les actions des personnes que l'on suit
