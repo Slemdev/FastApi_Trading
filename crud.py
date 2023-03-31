@@ -20,7 +20,7 @@ def creer_utilisateur(nom:str, email:str, mdp:str, jwt:str) -> int:
     connexion.close()
     return id_user
 
-#creation action
+#creer une ligne dans le registre des actions
 def creer_action(titre:str, contenu:str, auteur_id:int) -> None:
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
@@ -80,7 +80,7 @@ def get_JWT_by_mail(JWT:str, mail:str, mdp:str):
     return resultat
 
 
-
+# obtenir l'id d'un utilisateur depuis son mail
 def get_id_user_by_email(email:str):
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
@@ -114,6 +114,19 @@ def update_token(id, token:str)->None:
     connexion.commit()
     connexion.close()
     
+#changement de mail
+def update_email(id, token:str)->None:
+    connexion = sqlite3.connect("bdd.db")
+    curseur = connexion.cursor()
+    curseur.execute("""
+                    UPDATE utilisateur
+                        SET mail = ?
+                        WHERE id=?
+                    """,(token, id))
+    connexion.commit()
+    connexion.close()
+    
+
 # Obtenir actions d'un utilisateur : 
 #voir les actions des personnes que l'on suit
 def obtenir_action_user(id_user:int) -> list:
