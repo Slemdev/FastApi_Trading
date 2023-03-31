@@ -1,26 +1,41 @@
-READ : 
+TODO : 
+    READ : 
 
-    séléctionner les actions disponibles
-    x	obtenir le JWT avec le mail et le mdp
-    vérifier la validité du JWT
-    x	voir ses actions
-    x	voir les actions des personnes que l'on suit
-    x	obtenir l'id d'un utilisateur depuis son mail et/ou son JWT
+        
+        x	obtenir le JWT avec le mail et le mdp
+        vérifier la validité du JWT
+        x	voir ses actions
+        x	voir les actions des personnes que l'on suit
+        x	et/ou son JWT
 
-CREATE : 
-    x	creer un utilisateur
-    creer une action
-    creer une ligne dans le registre des actions
-    permettre à un utilisateur d'en suivre un autre
+    CREATE : 
+        creer une ligne dans le registre des actions
+        permettre à un utilisateur d'en suivre un autre
 
-UPDATE : 
-    changement de mail 
-    x changement de JWT
-    x changement de mdp
-    vendre une action
-    (changer la valeur d'une action ( bonus ))
+    UPDATE : 
+        changement de mail 
+        
+        x changement de mdp
+        vendre une action
+        (changer la valeur d'une action ( bonus ))
 
-DELETE : 
-    supprimer une action
-    supprimer un utilisateur
-    arrêter de suivre
+    DELETE : 
+        supprimer une action
+        supprimer un utilisateur
+        arrêter de suivre
+
+DONE : 
+    READ
+    x   séléctionner les actions disponibles
+    x   voir les actions des personnes que l'on suit
+    x   obtenir l'id d'un utilisateur depuis son mail 
+    x   obtenir l'id d'un utilisateur depuis son JWT
+
+    CREATE
+    x   creer un utilisateur
+    x   creer une action
+
+
+    UPDATE
+    x   
+    DELETE

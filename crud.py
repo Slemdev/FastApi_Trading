@@ -6,6 +6,7 @@ import datetime
 
 # Ajout d'éléments dans la BDD
 
+#creation utilisateur
 def creer_utilisateur(nom:str, email:str, mdp:str, jwt:str) -> int:
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
@@ -18,7 +19,8 @@ def creer_utilisateur(nom:str, email:str, mdp:str, jwt:str) -> int:
 
     connexion.close()
     return id_user
-    
+
+#creation action
 def creer_action(titre:str, contenu:str, auteur_id:int) -> None:
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
@@ -41,13 +43,25 @@ def obtenir_jwt_depuis_email_mdp(email:str, mdp:str):
     resultat = curseur.fetchone()
     connexion.close()
     return resultat
-    
+
+#obtenir l'id d'un utilisateur depuis son mail
 def get_users_by_mail(mail:str):
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
     curseur.execute("""
                     SELECT * FROM utilisateur WHERE email=?
                     """, (mail,))
+    resultat = curseur.fetchall()
+    connexion.close()
+    return resultat
+
+#obtenir l'id d'un utilisateur depuis son JWT
+def get_users_by_JWT(JWT:str):
+    connexion = sqlite3.connect("bdd.db")
+    curseur = connexion.cursor()
+    curseur.execute("""
+                    SELECT * FROM utilisateur WHERE JWT=?
+                    """, (JWT,))
     resultat = curseur.fetchall()
     connexion.close()
     return resultat
@@ -64,8 +78,8 @@ def get_id_user_by_email(email:str):
     connexion.close()
     return resultat
 
-
-#def select_actions_dispo(mail:str):
+#séléctionner les actions disponibles
+def select_actions_dispo(mail:str):
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
     curseur.execute("""
@@ -75,7 +89,7 @@ def get_id_user_by_email(email:str):
     connexion.close()
     return resultat
 
-
+#changement de JWT
 def update_token(id, token:str)->None:
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
@@ -88,7 +102,7 @@ def update_token(id, token:str)->None:
     connexion.close()
     
 # Obtenir actions d'un utilisateur : 
-
+#voir les actions des personnes que l'on suit
 def obtenir_action_user(id_user:int) -> list:
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
