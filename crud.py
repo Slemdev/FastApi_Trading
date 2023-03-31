@@ -49,7 +49,7 @@ def get_users_by_mail(mail:str):
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
     curseur.execute("""
-                    SELECT * FROM utilisateur WHERE email=?
+                    SELECT id FROM utilisateur WHERE email=?
                     """, (mail,))
     resultat = curseur.fetchall()
     connexion.close()
@@ -60,7 +60,7 @@ def get_users_by_JWT(JWT:str):
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
     curseur.execute("""
-                    SELECT * FROM utilisateur WHERE JWT=?
+                    SELECT id FROM utilisateur WHERE JWT=?
                     """, (JWT,))
     resultat = curseur.fetchall()
     connexion.close()
