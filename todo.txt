@@ -1,7 +1,7 @@
 TODO : 
     READ : 
 
-        vérifier la validité du JWT
+
 
     CREATE : 
         permettre à un utilisateur d'en suivre un autre
@@ -23,7 +23,7 @@ DONE :
     x	obtenir le JWT avec le mail et le mdp
     x	voir ses actions
     x	voir les actions des personnes que l'on suit
-
+    x    vérifier la validité du JWT
 
 
     CREATE
