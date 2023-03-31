@@ -205,6 +205,10 @@ def vendre_action(id_action:int,id_user:int,prix_vente:int, email:str) -> list:
                         SET date_vente = ?
                         WHERE id_action = ?
                     """, (id_user,prix_vente,datetime.datetime.today().strftime("%Y-%m-%d %H:%M:%S"), id_action))
+    resultat = curseur.fetchall()
+    connexion.close()
+    return resultat
+
 
 # vérifié la validité du JWT
 def verifier_JWT(jwt) -> None :
@@ -218,7 +222,6 @@ def verifier_JWT(jwt) -> None :
     if len(resultat) <1 :
         return False
     return True
-    connexion.close()
     return resultat
 
 
