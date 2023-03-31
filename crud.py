@@ -66,6 +66,19 @@ def get_users_by_JWT(JWT:str):
     connexion.close()
     return resultat
 
+#obtenir le JWT avec l'auth id/mdp
+def get_JWT_by_mail(JWT:str, mail:str, mdp:str):
+    connexion = sqlite3.connect("bdd.db")
+    curseur = connexion.cursor()
+    curseur.execute("""
+                    SELECT jwt FROM utilisateur 
+                    WHERE mail=?
+                    AND WHERE mdp=?
+                    """, (JWT,mail, mdp))
+    resultat = curseur.fetchall()
+    connexion.close()
+    return resultat
+
 
 
 def get_id_user_by_email(email:str):
