@@ -189,18 +189,18 @@ def obtenir_action_user(id_user:int, id_action:int) -> list:
 #obtenir les actions d'une personne suivi
 
 
-def obtenir_action_suivi(id_user:int) -> list:
+def obtenir_action_suivi(id_user:int, id_action:int) -> list:
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
     curseur.execute("""
                     SELECT * FROM actions WHERE utilisateur_id = ?
-                    """, (id_user,))
+                    """, (id_user,id_action))
     resultat = curseur.fetchall()
     connexion.close()
     return resultat
 
 #vendre une action
-def vendre_action(id_action:int,id_user:int,prix_vente:int, email:str) -> list:
+def vendre_action(id_action:int,id_user:int,prix_vente:int) -> list:
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
     curseur.execute("""
@@ -216,18 +216,17 @@ def vendre_action(id_action:int,id_user:int,prix_vente:int, email:str) -> list:
 
 
 # vérifié la validité du jwt
-def verifier_jwt(jwt) -> None :
+def verifier_jwt(jwt:str, id_user:str) -> None :
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
     curseur.execute("""
-                    SELECT * FROM utilisateur 
-                    WHERE jwt = ?
-                    """, (jwt))
+                    SELECT jwt FROM utilisateur 
+                    WHERE id_utilisateur = ?
+                    """, (jwt,id_user))
     resultat = curseur.fetchall()
     if len(resultat) <1 :
         return False
     return True
-    return resultat
 
 
 #suppimer un utilisateur
