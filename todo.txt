@@ -5,7 +5,7 @@ TODO :
 
     UPDATE : 
 
-        (changer la valeur d'une action ( bonus ))
+
 
     DELETE : 
 
@@ -19,7 +19,7 @@ DONE :
     x	obtenir le JWT avec le mail et le mdp
     x	voir ses actions
     x	voir les actions des personnes que l'on suit
-    x    vérifier la validité du JWT
+    x   vérifier la validité du JWT
 
 
     CREATE
@@ -30,10 +30,11 @@ DONE :
 
     UPDATE
     x   changement de mail 
-    x    changement de mdp
-    x    vendre une action    
+    x   changement de mdp
+    x   vendre une action    
+    x   (changer la valeur d'une action ( bonus ))
         
     DELETE
-    x    supprimer un utilisateur
-    x    arrêter de suivre
-    x    supprimer une action
+    x   supprimer un utilisateur
+    x   arrêter de suivre
+    x   supprimer une action
