@@ -156,6 +156,17 @@ def update_email(mdp:str, mail:str) -> None:
     connexion.commit()
     connexion.close()
     
+#changement de valeur action
+def update_action(entreprise:str, prix:int) -> None:
+    connexion = sqlite3.connect("bdd.db")
+    curseur = connexion.cursor()
+    curseur.execute("""
+                    UPDATE action
+                        SET prix = ?
+                        WHERE entreprise =?
+                    """,(entreprise,prix))
+    connexion.commit()
+    connexion.close()
 
 # Obtenir actions d'un utilisateur : 
 #voir les actions des personnes que l'on suit
@@ -188,11 +199,6 @@ def vendre_action(id_action:int,id_user:int,prix_vente:int, email:str) -> list:
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
     curseur.execute("""
-<<<<<<< HEAD
-                    UPDATE portefeuille_actions 
-                    WHERE id_actions = ? AND id_user= ? AND prix_vente= ? AND date_vente = ?
-                    """, (id_action,id_user,prix_vente,datetime.datetime.today().strftime("%Y-%m-%d %H:%M:%S")))
-=======
                     UPDATE portefeuille_actions
                         SET id_user = ? 
                         SET prix_vente = ?
@@ -208,7 +214,6 @@ def verifier_JWT(jwt) -> None :
                     SELECT * FROM utilisateur 
                     WHERE jwt = ?
                     """, (jwt))
->>>>>>> 719c2a7219757d19a4cb4fc35a7565980b5ac73a
     resultat = curseur.fetchall()
     if len(resultat) <1 :
         return False
