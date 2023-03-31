@@ -79,16 +79,6 @@ def get_JWT_by_mail(JWT:str, mail:str, mdp:str):
     return resultat
 
 
-# obtenir l'id d'un utilisateur depuis son mail
-def get_id_user_by_email(email:str):
-    connexion = sqlite3.connect("bdd.db")
-    curseur = connexion.cursor()
-    curseur.execute("""
-                    SELECT id FROM utilisateur WHERE email=?
-                    """, (email,))
-    resultat = curseur.fetchone()
-    connexion.close()
-    return resultat
 
 #séléctionner les actions disponibles
 def select_actions_dispo(mail:str):
