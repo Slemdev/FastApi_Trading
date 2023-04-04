@@ -76,14 +76,14 @@ def obtenir_jwt_depuis_email_mdp(email:str, mdp:str):
     return resultat
 
 #obtenir l'id d'un utilisateur depuis son mail
-def get_users_by_mail(mail:str):
+def get_users_by_mail(email:str):
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
     curseur.execute("""
                     SELECT id 
                         FROM utilisateur 
                         WHERE email=?
-                    """, (mail,))
+                    """, (email,))
     resultat = curseur.fetchall()
     connexion.close()
     return resultat
@@ -94,7 +94,7 @@ def get_users_by_jwt(jwt:str):
     curseur = connexion.cursor()
     curseur.execute("""
                     SELECT id 
-                        ROM utilisateur 
+                        FROM utilisateur 
                         WHERE jwt=?
                     """, (jwt,))
     resultat = curseur.fetchall()
@@ -102,14 +102,14 @@ def get_users_by_jwt(jwt:str):
     return resultat
 
 #obtenir le jwt avec l'auth mail/mdp
-def get_jwt_by_mail(jwt:str, mail:str, mdp:str):
+def get_jwt_by_mail(jwt:str, email:str, mdp:str):
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
     curseur.execute("""
                     SELECT jwt 
                         FROM utilisateur
-                        WHERE mail=? AND mdp=?
-                    """, (jwt,mail, mdp))
+                        WHERE email=? AND mdp=?
+                    """, (jwt,email, mdp))
     resultat = curseur.fetchall()
     connexion.close()
     return resultat
@@ -139,26 +139,26 @@ def update_token(id, jwt:str)->None:
     connexion.close()
     
 #changement de mail
-def update_email(id, mail:str) -> None:
+def update_email(id, email:str) -> None:
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
     curseur.execute("""
                     UPDATE utilisateur
-                        SET mail = ?
+                        SET email = ?
                         WHERE id=?
-                    """,( id,mail))
+                    """,( id,email))
     connexion.commit()
     connexion.close()
     
 #changement de mdp
-def update_email(mdp:str, mail:str) -> None:
+def update_email(mdp:str, email:str) -> None:
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
     curseur.execute("""
                     UPDATE utilisateur
                         SET mdp = ?
-                        WHERE mail=?
-                    """,(mdp,mail))
+                        WHERE email=?
+                    """,(mdp,email))
     connexion.commit()
     connexion.close()
     
@@ -190,7 +190,7 @@ def obtenir_action_user(id_user:int, id_action:int) -> list:
 #obtenir les actions d'une personne suivi
 
 
-def obtenir_action_suivi(id_suivi:int,id_action) -> list:
+def obtenir_action_suivi(id_suivi:int,id_action:int) -> list:
     connexion = sqlite3.connect("bdd.db")
     curseur = connexion.cursor()
     curseur.execute("""

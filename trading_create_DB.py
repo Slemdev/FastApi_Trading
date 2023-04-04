@@ -23,7 +23,7 @@ curseur.execute("""
                 CREATE TABLE IF NOT EXISTS actions (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     entreprise TEXT NOT NULL,
-                    prix INTEGER NOT NULL,
+                    prix INTEGER NOT NULL
                     
 )
 """)

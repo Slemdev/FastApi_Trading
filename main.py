@@ -32,6 +32,13 @@ class UserLogin(BaseModel):
     email:str
     mdp:str
 
+class Usersuivi(BaseModel):
+    id_suiveur:int
+    id_suivi:int
+    
+
+    
+    
 app = FastAPI()
 
 
@@ -56,6 +63,26 @@ async def inscription(user:UserRegister):
         }, SECRET_KEY, algorithm=ALGORITHM)
         crud.update_token(id_user, token)
         return {"token" : token}
+    
+
+    
+    
+@app.post("/api/users/follow/")
+async def follow(user:Usersuivi):
+    crud.user_suivi_user(user.id_suiveur, user.id_suivi)
+    return {"message": "L'utilisateur avec l'ID " + str(user.id_suiveur) + " suit désormais l'utilisateur avec l'ID " + str(user.id_suivi)}
+
+
+@app.post("/api/creeactions/")
+async def creer_action_table_action(id_user:int, id_action:int):
+    crud.creer_action(id_user, id_action)
+    return {"message": "L'action a été créée avec succès."}
+
+@app.post("/api/creeactions/")
+async def inscrire_action_portefeuillesactions(id_user:int,id_action: int,prix_achat:int,prix_vente:int,date_achat,date_vente):
+    crud.creer_ligne_action( id_user,id_action,prix_achat,prix_vente,date_achat,date_vente)
+    return {"message": "les attributs de l'action creer ont etait ajoutés ."}
+
 
 @app.post("/api/auth/token")
 async def login_token(user:UserLogin):
@@ -69,6 +96,9 @@ async def login_token(user:UserLogin):
 async def Mes_actions(req: Request):
     try:
         decode = decoder_token(req.headers["Authorization"])
-        return {"id_user" : crud.get_id_user_by_email(decode["email"])[0]}
+        return {"id_user" : crud.get_users_by_email(decode["email"])[0]}
     except:
         raise HTTPException(status_code=401, detail="Vous devez être identifiés pour accéder à cet endpoint")
+    
+
+
