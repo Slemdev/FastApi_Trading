@@ -36,6 +36,9 @@ class Usersuivi(BaseModel):
     id_suiveur:int
     id_suivi:int
     
+class Follow(BaseModel):
+    email_suivi: str
+    
 
     
     
@@ -78,10 +81,33 @@ async def creer_action_table_action(id_user:int, id_action:int):
     crud.creer_action(id_user, id_action)
     return {"message": "L'action a été créée avec succès."}
 
-@app.post("/api/creeactions/")
-async def inscrire_action_portefeuillesactions(id_user:int,id_action: int,prix_achat:int,prix_vente:int,date_achat,date_vente):
-    crud.creer_ligne_action( id_user,id_action,prix_achat,prix_vente,date_achat,date_vente)
-    return {"message": "les attributs de l'action creer ont etait ajoutés ."}
+
+
+# @app.delete("/utilisateur/arreter_de_suivre_utilisateur")
+# async def arreter_de_suivre_utilisateur(req: Request, follow: follow):
+#     try:
+#         decode = decoder_token(req.headers["Authorization"])
+#         crud.arreter_de_suivre_utilisateur(decode["id"], follow.email_suivi)
+#         return {"message": "L'utilisateur n'est plus suivi."}
+#     except:
+#         raise HTTPException(status_code=401, detail="Vous devez être identifié pour accéder à cet endpoint.")
+    
+
+# @app.put("/utilisateur/mettre_a_jour_utilisateur/{id}")
+# async def modifier_utilisateur_route(id: int, utilisateur: User) -> None:
+#     crud.modifier_utilisateur(id, utilisateur.pseudo, utilisateur.email, utilisateur.mdp)
+#     return {"detail": "Utilisateur mis à jour avec succès"}
+
+
+# @app.get("/utilisateur/portefeuille/{user_id}")
+# async def portefeuille_route(user_id: int) -> dict:
+#     portefeuille_data = crud.portefeuille(user_id)
+#     return {"portefeuille": portefeuille_data}
+
+# @app.post("/api/ajoutaction/")
+# async def inscrire_action_portefeuillesactions(id_user:int,id_action: int,prix_achat:int,prix_vente:int,date_achat,date_vente):
+#     crud.creer_ligne_action( id_user,id_action,prix_achat,prix_vente,date_achat,date_vente)
+#     return {"message": "les attributs de l'action creer ont etait ajoutés ."}
 
 
 @app.post("/api/auth/token")
